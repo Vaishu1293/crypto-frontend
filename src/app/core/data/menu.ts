@@ -54,14 +54,50 @@ export const MENU: MenuItem[] = [
       //   link: '/job',
       //   parentId: 2,
       // }
+      {
+        id: 9,
+        label: 'NFT Metadata',
+        link: '/nft-metadata',
+        parentId: 2,
+      },
+      {
+        id: 10,
+        label: 'IPFS Data',
+        link: '/ipfs-data',
+        parentId: 2,
+      },
+      {
+        id: 11,
+        label: 'Token Balance',
+        link: '/token-balance',
+        parentId: 2,
+      },
+      {
+        id: 12,
+        label: 'Query Transactions',
+        link: '/query-transaction',
+        parentId: 2,
+      },
+      {
+        id: 13,
+        label: 'Transfer Tokens',
+        link: '/transfer-tokens',
+        parentId: 2,
+      },
     ]
   },
   {
     id: 8,
-    label: 'MENUITEMS.APPS.TEXT',
+    label: 'Trading',
     icon: 'lab la-delicious',
     isCollapsed: true,
     subItems: [
+      {
+        id: 49,
+        label: 'Start Trading',
+        link: '/crypto',
+        parentId: 8
+      },
       // {
       //   id: 9,
       //   label: 'MENUITEMS.APPS.LIST.CALENDAR',
@@ -524,6 +560,7 @@ export const MENU: MenuItem[] = [
       //   link: '/apikey',
       //   parentId: 8,
       // },
+      
     ]
   },
   // {

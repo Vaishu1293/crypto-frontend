@@ -8,6 +8,11 @@ import { CryptoComponent } from "./crypto/crypto.component";
 import { ProjectsComponent } from "./projects/projects.component";
 import { NftComponent } from "./nft/nft.component";
 import { JobComponent } from './job/job.component';
+import { NftMetadataComponent } from './nft-metadata/nft-metadata.component';
+import { IpfsDataComponent } from './ipfs-data/ipfs-data.component';
+import { TokenBalanceComponent } from './token-balance/token-balance.component';
+import { QueryTransactionsComponent } from './query-transactions/query-transactions.component';
+import { TransferTokensComponent } from './transfer-tokens/transfer-tokens.component';
 
 const routes: Routes = [
   {
@@ -33,6 +38,26 @@ const routes: Routes = [
   {
     path: "job",
     component: JobComponent
+  },
+  {
+    path: "nft-metadata",
+    component: NftMetadataComponent
+  },
+  {
+    path: "ipfs-data",
+    component: IpfsDataComponent
+  },
+  {
+    path: "token-balance",
+    component: TokenBalanceComponent
+  },
+  {
+    path: "query-transactions",
+    component: QueryTransactionsComponent
+  },
+  {
+    path: "transfer-tokens",
+    component: TransferTokensComponent
   }
 ];
 

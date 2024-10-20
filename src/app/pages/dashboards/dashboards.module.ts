@@ -29,6 +29,11 @@ import { CryptoComponent } from './crypto/crypto.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { NftComponent } from './nft/nft.component';
 import { JobComponent } from './job/job.component';
+import { NftMetadataComponent } from './nft-metadata/nft-metadata.component';
+import { IpfsDataComponent } from './ipfs-data/ipfs-data.component';
+import { TokenBalanceComponent } from './token-balance/token-balance.component';
+import { QueryTransactionsComponent } from './query-transactions/query-transactions.component';
+import { TransferTokensComponent } from './transfer-tokens/transfer-tokens.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +42,12 @@ import { JobComponent } from './job/job.component';
     CryptoComponent,
     ProjectsComponent,
     NftComponent,
-    JobComponent
+    JobComponent,
+    NftMetadataComponent,
+    IpfsDataComponent,
+    TokenBalanceComponent,
+    QueryTransactionsComponent,
+    TransferTokensComponent
   ],
   imports: [
     CommonModule,

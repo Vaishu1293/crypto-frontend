@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Market } from 'src/app/core/data';
+import { CryptoService } from 'src/app/core/services/crypto-service';
 import { PaginationService } from 'src/app/core/services/pagination.service';
 import { MarketModel } from 'src/app/store/Crypto/crypto_model';
 
@@ -12,6 +13,9 @@ import { MarketModel } from 'src/app/store/Crypto/crypto_model';
 })
 export class NftMetadataComponent {
 
+  contractAddress: string = '';
+  tokenID: string = '';
+
   // bread crumb items
   breadCrumbItems!: Array<{}>;
   marketGraphChart: any;
@@ -20,7 +24,7 @@ export class NftMetadataComponent {
   buysellList!: MarketModel[];
   searchResults: any;
 
-  constructor(public service:PaginationService) {
+  constructor(public service:PaginationService, private cryptoService: CryptoService) {
      }
 
   ngOnInit(): void {
@@ -374,6 +378,14 @@ export class NftMetadataComponent {
       );
     });
     this.buysellList = this.service.changePage(this.searchResults)
+  }
+
+  getNFTData(){
+    console.log(this.contractAddress, this.tokenID);
+    this.cryptoService.retriveNFTMetadata({
+      address: this.contractAddress,
+      tokenId: this.tokenID
+    });
   }
 
 

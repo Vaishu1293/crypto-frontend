@@ -1,0 +1,39 @@
+{
+    "amount": "1",
+    "tokenId": "3931",
+    "contractAddress": "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB",
+    "contractType": "CRYPTOPUNKS",
+    "ownerOf": "0xcf0c1184f672cef132cec0a2741e90a5690e0fb0",
+    "lastMetadataSync": "2024-11-07T08:10:54.791Z",
+    "lastTokenUriSync": "2024-11-07T08:10:54.508Z",
+    "metadata": {
+        "image": "https://www.larvalabs.com/cryptopunks/cryptopunk3931.png",
+        "name": "CryptoPunk 3931",
+        "attributes": [
+            "Vampire Hair",
+            "Goat"
+        ],
+        "description": "Male"
+    },
+    "blockNumber": "19268387",
+    "blockNumberMinted": null,
+    "name": "CRYPTOPUNKS",
+    "symbol": "Ͼ",
+    "tokenHash": "3c86855c82470edd82df190019e83f16",
+    "tokenUri": "Invalid uri",
+    "minterAddress": null,
+    "rarityRank": 4166,
+    "rarityPercentage": 41.66,
+    "rarityLabel": "Top 42%",
+    "verifiedCollection": true,
+    "possibleSpam": false,
+    "collectionLogo": "https://i.seadn.io/gae/BdxvLseXcfl57BiuQcQYdJ64v-aI8din7WPk0Pgo3qQFhAUH-B6i-dCqqc_mCkRIzULmwzwecnohLhrcH8A9mpWIZqA7ygc52Sr81hE?w=500&auto=format",
+    "collectionBannerImage": "https://i.seadn.io/gae/48oVuDyfe_xhs24BC2TTVcaYCX7rrU5mpuQLyTgRDbKHj2PtzKZsQ5qC3xTH4ar34wwAXxEKH8uUDPAGffbg7boeGYqX6op5vBDcbA?w=500&auto=format",
+    "floorPrice": null,
+    "floorPriceUsd": null,
+    "floorPriceCurrency": null,
+    "_id": "672c95471331db9ffa5ed5f0",
+    "createdAt": "2024-11-07T10:24:07.744Z",
+    "updatedAt": "2024-11-07T10:24:07.744Z",
+    "__v": 0
+}

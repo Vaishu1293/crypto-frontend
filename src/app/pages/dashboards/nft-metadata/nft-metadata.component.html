@@ -1,94 +1,240 @@
 <div class="row">
     <div class="col-xxl-9">
-        <div class="card" id="marketList">
-            <div class="card-header border-bottom-dashed">
-                <div class="row align-items-center">
-                    <div class="col-3">
-                        <h5 class="card-title mb-0">Markets</h5>
-                    </div><!--end col-->
-                    <div class="col-auto ms-auto">
-                        <div class="d-flex gap-2">
-                            <button class="btn btn-success"><i class="ri-equalizer-line align-bottom me-1"></i> Filters</button>
-                        </div>
-                    </div><!--end col-->
-                </div><!--end row-->
-            </div><!--end card-header-->
-            <div class="card-body p-0 border-bottom border-bottom-dashed">
-                <div class="search-box">
-                    <input type="text"  name="searchTerm" class="form-control search border-0 py-3" placeholder="Search to currency..." [(ngModel)]="searchTerm" (ngModelChange)="performSearch()">
-                    <i class="ri-search-line search-icon"></i>
-                </div>
-            </div><!--end card-body-->
+        <div class="card" *ngIf="nftData">
             <div class="card-body">
-                <div class="table-responsive table-card">
-                  <table class="table align-middle table-nowrap" id="customerTable">
-                    <thead class="table-light text-muted">
-                      <tr>
-                          <th class="sort" (click)="onSort('coinName')" scope="col">Currency
-                          </th>
-                          <th class="sort" (click)="onSort('price')" scope="col">Price</th>
-                          <th class="sort" (click)="onSort('pairs')" scope="col">Pairs</th>
-                          <th class="sort" (click)="onSort('high')" scope="col">24 High</th>
-                          <th class="sort" (click)="onSort('low')" scope="col">24 Low</th>
-                          <th class="sort" (click)="onSort('marketVolume')" scope="col">
-                              Market Volume</th>
-                          <th class="sort" (click)="onSort('percentage')" scope="col">Volume
-                              %</th>
-                          <th scope="col">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody class="list form-check-all">
-                      @for(data of buysellList; track $index){
-                      <tr>
-                        <td>
-                          <div class="d-flex align-items-center fw-medium">
-                              <img src="{{data.img}}" alt="" class="avatar-xxs me-2">
-                              <a href="javascript:void(0);" class="currency_name">{{data.coinName}}</a>
-                          </div>
-                        </td>
-                        <td><ngb-highlight [result]="data.price" [term]="searchTerm"></ngb-highlight></td>
-                        <td><ngb-highlight [result]="data.pairs" [term]="searchTerm"></ngb-highlight></td>
-                        <td><ngb-highlight [result]="data.high" [term]="searchTerm"></ngb-highlight></td>
-                        <td><ngb-highlight [result]="data.low" [term]="searchTerm"></ngb-highlight></td>
-                        <td><ngb-highlight [result]="data.marketVolume" [term]="searchTerm"></ngb-highlight></td>
-                        <td class="valume"><h6 class="text-{{data.iconClass}} fs-13 mb-0"><i class="mdi {{data.icon}} align-middle me-1"></i>{{data.percentage}}</h6></td>
-                        <td>
-                          <button class="btn btn-sm btn-soft-info">Trade Now</button>
-                       </td>
-                      </tr>
-                  }
-                    </tbody>
-                  </table><!--end table-->
+                <div class="row g-4">
+                    <div class="col-lg-4">
+                        <div class="sticky-side-div">
+                            <div class="card ribbon-box border shadow-none right">
+                                <div class="ribbon-two ribbon-two-danger" *ngIf="nftData"><span><i class="ri-fire-fill align-bottom"></i>
+                                        Hot</span></div>
+                                <img [src]="nftData?.metadata.image" alt="" class="img-fluid rounded">
+                            </div>
+                            <div class="hstack gap-2" *ngIf="nftData">
+                                <button class="btn btn-success w-100">Place Bid</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end col-->
+                    <div class="col-lg-8">
+                        <div>
+                            <!-- Dropdown Actions -->
+                            <div class="dropdown float-end" ngbDropdown>
+                                <button class="btn btn-ghost-primary btn-icon dropdown arrow-none" type="button" data-bs-toggle="dropdown" aria-expanded="false" ngbDropdownToggle>
+                                    <i class="ri-more-fill align-middle fs-16"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
+                                    <li><a class="dropdown-item view-item-btn" href="javascript:void(0);"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li>
+                                    <li><a class="dropdown-item edit-item-btn" href="javascript:void(0);"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a></li>
+                                    <li><a class="dropdown-item remove-item-btn" href="javascript:void(0);"><i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete</a></li>
+                                </ul>
+                            </div>
+                    
+                            <!-- Views and Title -->
+                            <span class="badge bg-info-subtle text-info mb-3 fs-12"><i class="ri-eye-line me-1 align-bottom"></i> 8,634 people viewed this</span>
+                            <h4>{{ nftData?.metadata.name }}</h4>
+                    
+                            <!-- Details Row -->
+                            <div class="hstack gap-3 flex-wrap">
+                                <div class="text-muted">Creator: <a href="javascript:void(0);" class="text-primary fw-medium">Unknown</a></div>
+                                <div class="vr"></div>
+                                <div class="text-muted">Owner: <span class="text-body fw-medium">{{ nftData?.ownerOf }}</span></div>
+                                <div class="vr"></div>
+                                <div class="text-muted">Published: <span class="text-body fw-medium">{{ nftData?.createdAt | date:'d MMM, y' }}</span></div>
+                            </div>
+                    
+                            <!-- Rating Section -->
+                            <div class="d-flex flex-wrap gap-2 align-items-center mt-3">
+                                <div class="text-muted fs-16">
+                                    <span class="mdi mdi-star text-warning"></span>
+                                    <span class="mdi mdi-star text-warning"></span>
+                                    <span class="mdi mdi-star text-warning"></span>
+                                    <span class="mdi mdi-star text-warning"></span>
+                                    <span class="mdi mdi-star text-warning"></span>
+                                </div>
+                                <div class="text-muted">(5.50k Customer Reviews)</div>
+                            </div>
+                    
+                            <!-- NFT Details: Price, Highest Bid, Stock, Auction Ends -->
+                            <div class="row mt-4">
+                                <div class="col-lg-3 col-sm-6">
+                                    <div class="p-2 border border-dashed rounded text-center">
+                                        <div>
+                                            <p class="text-muted fw-medium mb-1">Price:</p>
+                                            <h5 class="fs-17 text-success mb-0"><i class="mdi mdi-ethereum me-1"></i> 83.06 ETH</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-6">
+                                    <div class="p-2 border border-dashed rounded text-center">
+                                        <div>
+                                            <p class="text-muted fw-medium mb-1">Highest Bid</p>
+                                            <h5 class="fs-17 mb-0">104.63 ETH</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-6">
+                                    <div class="p-2 border border-dashed rounded text-center">
+                                        <div>
+                                            <p class="text-muted fw-medium mb-1">Stock</p>
+                                            <h5 class="fs-17 mb-0">1 of 1 Available</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-6">
+                                    <div class="p-2 border border-dashed rounded text-center">
+                                        <div>
+                                            <p class="text-muted fw-medium mb-1">Auction Ends:</p>
+                                            <h5 class="mb-0">{{_days}} : {{_hours}} : {{_minutes}} : {{_seconds}}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    
+                            <!-- NFT Description -->
+                            <div class="mt-4 text-muted">
+                                <h5 class="fs-14">Description:</h5>
+                                <p>{{ nftData?.metadata.description }}</p>
+                            </div>
+                    
+                            <!-- Product Content Tabs -->
+                            <div class="product-content mt-5">
+                                <h5 class="fs-14 mb-3">Product Description:</h5>
+                                <nav>
+                                    <ul ngbNav #nav="ngbNav" [activeId]="1" class="nav nav-tabs nav-tabs-custom nav-success">
+                                        <li [ngbNavItem]="1">
+                                            <a ngbNavLink>Attributes</a>
+                                            <ng-template ngbNavContent>
+                                                <div class="tab-pane fade show active">
+                                                    <ul>
+                                                        <li *ngFor="let attribute of nftData?.metadata.attributes" class="text-muted">- {{ attribute }}</li>
+                                                    </ul>
+                                                </div>
+                                            </ng-template>
+                                        </li>
+                                        <li [ngbNavItem]="2">
+                                            <a ngbNavLink>Additional Information</a>
+                                            <ng-template ngbNavContent>
+                                                <div class="table-responsive">
+                                                    <table class="table mb-0">
+                                                        <tbody>
+                                                            <tr>
+                                                                <th scope="row" style="width: 200px;">Token ID</th>
+                                                                <td>{{ nftData?.tokenId }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">Contract Address</th>
+                                                                <td>{{ nftData?.contractAddress }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">Blockchain</th>
+                                                                <td>Ethereum</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">Rarity Rank</th>
+                                                                <td>#{{ nftData?.rarityRank }} ({{ nftData?.rarityLabel }})</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </ng-template>
+                                        </li>
+                                        <li [ngbNavItem]="3">
+                                            <a ngbNavLink>Details</a>
+                                            <ng-template ngbNavContent>
+                                                <div>
+                                                    <h5 class="font-size-16 mb-3">{{ nftData?.name }}</h5>
+                                                    <p>{{ nftData?.metadata.description }}</p>
+                                                </div>
+                                            </ng-template>
+                                        </li>
+                                    </ul>
+                                </nav>
+                                <div class="tab-content border border-top-0 p-4" id="nav-tabContent">
+                                    <div [ngbNavOutlet]="nav"></div>
+                                </div>
+                            </div>
+                    
+                            <!-- Ratings & Reviews Section -->
+                            <div class="mt-5">
+                                <h5 class="fs-14 mb-3">Ratings & Reviews</h5>
+                                <div class="row gy-4 gx-0">
+                                    <div class="col-lg-4">
+                                        <div>
+                                            <div class="pb-3">
+                                                <div class="bg-light px-3 py-2 rounded-2 mb-2">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="fs-16 align-middle text-warning">
+                                                            <i class="ri-star-fill"></i>
+                                                            <i class="ri-star-fill"></i>
+                                                            <i class="ri-star-fill"></i>
+                                                            <i class="ri-star-fill"></i>
+                                                            <i class="ri-star-half-fill"></i>
+                                                        </div>
+                                                        <h6 class="mb-0 ms-auto">4.8 out of 5</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="text-center">
+                                                    <div class="text-muted">Total <span class="fw-medium">7.32k</span> reviews</div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-3">
+                                                <div class="row align-items-center g-2">
+                                                    <div class="col-auto">5 star</div>
+                                                    <div class="col"><div class="progress"><div class="progress-bar bg-success" role="progressbar" style="width: 50%"></div></div></div>
+                                                    <div class="col-auto">2758</div>
+                                                </div>
+                                                <!-- Repeat similar rows for 4, 3, 2, and 1 stars with different widths and counts -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- User Reviews Section -->
+                                    <div class="col-lg-8">
+                                        <ngx-simplebar class="me-lg-n3 pe-lg-4" style="max-height: 225px">
+                                            <ul class="list-unstyled mb-0">
+                                                <li class="py-2">
+                                                    <div class="border border-dashed rounded p-3">
+                                                        <div class="d-flex align-items-start mb-3">
+                                                            <div class="badge rounded-pill bg-success mb-0"><i class="mdi mdi-star"></i> 4.2</div>
+                                                            <div class="vr"></div>
+                                                            <h6 class="mb-0">Superb Artwork</h6>
+                                                        </div>
+                                                        <div class="d-flex flex-wrap gap-2 align-items-center mb-2">
+                                                            <img src="assets/images/small/img-12.jpg" alt="" class="avatar-sm rounded object-fit-cover" />
+                                                            <img src="assets/images/small/img-11.jpg" alt="" class="avatar-sm rounded object-fit-cover" />
+                                                            <img src="assets/images/small/img-10.jpg" alt="" class="avatar-sm rounded object-fit-cover" />
+                                                        </div>
+                                                        <div class="d-flex align-items-center">
+                                                            <h5 class="fs-14 mb-0">Henry</h5>
+                                                            <span class="text-muted fs-13 ms-auto">12 Jul, 21</span>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!-- Repeat similar reviews as needed -->
+                                            </ul>
+                                        </ngx-simplebar>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!--end col-->
                 </div>
-                <div class="row justify-content-md-between align-items-md-center mt-3">
-                  <div class="col col-sm-6">
-                      <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
-                          Showing
-                          {{service.startIndex}} to
-                          {{service.endIndex}} of {{buysellList.length}}
-                          entries
-                      </div>
-                  </div>
-                  <!-- Pagination -->
-                  <div class="col col-sm-6">
-                      <div class="text-sm-right float-end listjs-pagination">
-                        <ngb-pagination
-                        [collectionSize]="buysellList.length" [(page)]="service.page" [pageSize]="service.pageSize" (pageChange)="changePage()">
-                      </ngb-pagination>
-                      </div>
-                  </div>
-                  <!-- End Pagination -->
-                </div>
-            </div><!--end card-body-->
-          </div><!--end card-->
-    </div><!--end col-->
+                <!--end row-->
+            </div>
+        </div>
+        <!--end card-->
+    </div>
+
+    <!-- NFT Metadata Panel -->
     <div class="col-xxl-3">
         <div class="card card-height-100">
             <div class="card-header">
               <ul ngbNav #pillsnav="ngbNav" [activeId]="1" class="nav nav-tabs-custom rounded card-header-tabs nav-justified border-bottom-0 mx-n3">
                 <li [ngbNavItem]="1">
                     <a ngbNavLink class="nav-link">
-                        Retrive NFT Metadata
+                        Retrieve NFT Metadata
                     </a>
                     <ng-template ngbNavContent>
                       <div class="p-3">
@@ -108,7 +254,30 @@
                           <div class="mt-3 pt-2">
                               <button type="button" class="btn btn-primary w-100" (click)="getNFTData()">Get NFT Data</button>
                           </div>
-                      </div>
+
+                          <!-- NFT Metadata Display -->
+                          <div *ngIf="nftData" class="mt-4">
+                              <div class="text-center mb-3">
+                                  <img [src]="nftData?.metadata.image" alt="{{ nftData?.metadata.name }}" class="img-fluid rounded">
+                              </div>
+                              <h5 class="text-center">{{ nftData?.metadata.name }}</h5>
+                              <p class="text-center text-muted">{{ nftData?.metadata.description }}</p>
+                              
+                              <div class="list-group list-group-flush">
+                                  <div class="list-group-item"><strong>Contract Type:</strong> {{ nftData?.contractType }}</div>
+                                  <div class="list-group-item"><strong>Token ID:</strong> {{ nftData?.tokenId }}</div>
+                                  <div class="list-group-item"><strong>Owner:</strong> {{ nftData?.ownerOf }}</div>
+                                  <div class="list-group-item"><strong>Rarity Rank:</strong> {{ nftData?.rarityRank }} ({{ nftData?.rarityLabel }})</div>
+                                  <div class="list-group-item"><strong>Last Metadata Sync:</strong> {{ nftData?.lastMetadataSync | date: 'short' }}</div>
+                                  <div class="list-group-item"><strong>Block Number:</strong> {{ nftData?.blockNumber }}</div>
+                              </div>
+                              
+                              <h6 class="mt-4">Attributes</h6>
+                              <ul class="list-unstyled">
+                                  <li *ngFor="let attribute of nftData?.metadata.attributes" class="badge bg-secondary me-1">{{ attribute }}</li>
+                              </ul>
+                          </div>
+                        </div>
                     </ng-template>
                 </li>
             </ul>
@@ -119,6 +288,5 @@
                 </div>
             </div>
         </div>
-    </div><!--end col-->
-  </div><!--end row-->
-  
+    </div>
+</div>
